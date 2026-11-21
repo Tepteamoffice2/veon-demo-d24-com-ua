@@ -1,0 +1,29 @@
+---
+// "Підібрати за VIN": opens a choice of real channels (Viber, two phones). Native popover: works without scripts.
+// Scripts (src/scripts/site.ts) only place it under the button on wide screens and add "copy number" on desktop.
+import { phones, viber } from "../data/contacts";
+import Icon from "./Icon.astro";
+interface Props { id: string; label: string; rec?: string; }
+const { id, label, rec } = Astro.props;
+---
+<div class="picker-wrap" data-rec={rec}>
+  <button type="button" class="btn btn--primary picker-trigger" popovertarget={id} aria-haspopup="dialog">{label}</button>
+  <div id={id} popover="auto" class="picker" role="dialog" aria-labelledby={`${id}-title`}>
+    <div class="picker__head">
+      <p id={`${id}-title`} class="picker__title">Куди надіслати VIN-код?</p>
+      <button type="button" class="picker__close" popovertarget={id} popovertargetaction="hide">
+        <Icon name="close" /><span class="visually-hidden">Закрити</span>
+      </button>
+    </div>
+    <ul class="picker__list" role="list">
+      <li><a class="picker__item picker__item--viber" href={viber.href} target="_blank" rel="noopener">Написати у Viber<span class="picker__sub">{viber.number}</span></a></li>
+      {phones.map((p) => (
+        <li class="picker__row">
+          <a class="picker__item" href={p.href}>Подзвонити<span class="picker__sub">{p.display}</span></a>
+          <button type="button" class="picker__copy" data-copy={p.raw} aria-label={`Скопіювати номер ${p.display}`}><Icon name="copy" />Скопіювати</button>
+        </li>
+      ))}
+    </ul>
+    <p class="picker__status" role="status" aria-live="polite"></p>
+  </div>
+</div>

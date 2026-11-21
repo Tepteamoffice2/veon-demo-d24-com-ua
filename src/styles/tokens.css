@@ -1,0 +1,88 @@
+/* Hallmark · shape: custom (Δ-scale: one measuring line from VIN to the part in hand, hero band and delivery field) · genre: modern-minimal · theme: custom · job: buy + visit · idea: "Δ — відстань від вашого VIN до деталі в руках, виміряна у хвилинах і днях" · vibe: "вимірювальна шкала, біле поле, синій час, червона дія"
+ * paper: #FFFFFF · surface: absolute · accent: #C74539 · display: Advent Pro · body: Nata Sans · hero: custom, white head on nine columns with the shop passport on three, a full-width blue band of the Δ-scale with four marks at its foot · nav: logo left, five anchors, phone as text, Viber, future cart, account and RU as quiet links · footer: compact white strip, logo, anchors, future sections in two columns, payment marks as text · imagery: none (client logo only; the scale is a diagram of company intervals) · signature: the Δ-scale, the blue pointer at zero, minutes and days as the picture
+ * axes: light/grotesk-sans/warm · posture: full-palette (field blue #043C6B for time, signal red #C74539 for action, seal red field for the close, ink) · contrast: pass · fold: pass · v2.0.0 */
+/* Hallmark · pre-emit critique: P4 H4 E4 S5 R4 V4 · weakest: P, a parts shop page argues little; the scale makes the claim (minutes, days) the thing to disagree with */
+/* Hallmark · waive 7b · paper #FFFFFF is the native ground of the client's logo · the Delta Parts logo is a raster on white and its red half fails on any tint */
+/* Hallmark · waive 39b · primary buttons 56px per concept.md §8.10 · Delta Parts buyers tap Viber with a thumb on 390px phones, concept fixes 56px zones for the main action */
+/* Hallmark · answered F4 · the white Viber button sits only on the red contacts field where a red fill cannot stand; one red primary per screen elsewhere */
+/* Client design tokens from design/concept.md (veon-concept): colors, fonts, scale. One token system. */
+:root {
+  /* colour: roles from concept.md §8.2 */
+  --color-bg: #FFFFFF;
+  --color-surface: #EDF0F3;
+  --color-field: #043C6B;
+  --color-accent: #C74539;
+  --color-accent-hover: #A63428;
+  --color-seal: #C74539;
+  --color-pointer: #1396E9;
+  --color-text: #0B1A2A;
+  --color-muted: #4D5966;
+  --color-on-field: #FFFFFF;
+  --color-on-field-muted: #B7C7D8;
+  --color-on-accent: #FFFFFF;
+  --color-accent-ink: #FFFFFF;
+  --color-rule: #C9D1DA;
+  --color-rule-on-field: #3A6890;
+  --color-focus: #043C6B;
+  --color-focus-inverse: #FFFFFF;
+  --color-shadow: rgb(11 26 42 / 0.16);
+
+  /* type: Advent Pro (display) + Nata Sans (text), local woff2 via @fontsource-variable */
+  --font-display: "Advent Pro Variable", "Advent Pro", "Arial Narrow", sans-serif;
+  --font-body: "Nata Sans Variable", "Nata Sans", system-ui, sans-serif;
+  --text-display: clamp(2.5rem, 1.45rem + 4.4vw, 5.25rem);   /* 40 → 84 */
+  --text-section: clamp(2.25rem, 1.75rem + 2.1vw, 3.5rem);   /* 36 → 56 */
+  --text-statement: clamp(1.75rem, 1.2rem + 2.3vw, 3.5rem);  /* 28 → 56 */
+  --text-big: clamp(1.75rem, 1.4rem + 1.4vw, 2.5rem);        /* 28 → 40 */
+  --text-title: clamp(1.5rem, 1.3rem + 0.8vw, 1.75rem);      /* 24 → 28 */
+  --text-lead: clamp(1.0625rem, 1rem + 0.35vw, 1.25rem);     /* 17 → 20 */
+  --text-body: 1rem;
+  --text-small: 0.875rem;
+  --lh-display: 1.02;
+  --lh-head: 1.08;
+  --lh-body: 1.5;
+
+  /* space: rhythm of 8 (concept §8.4) */
+  --space-3xs: 0.25rem;  /* 4 */
+  --space-2xs: 0.5rem;   /* 8 */
+  --space-xs: 0.75rem;   /* 12 */
+  --space-s: 1rem;       /* 16 */
+  --space-m: 1.5rem;     /* 24 */
+  --space-l: 2.5rem;     /* 40 */
+  --space-xl: 4rem;      /* 64 */
+  --space-2xl: 6rem;     /* 96 */
+  --space-3xl: 8rem;     /* 128 */
+  --section-roomy: clamp(4.5rem, 3rem + 6vw, 8rem);     /* 72 → 128: vin, trust */
+  --section-mid: clamp(3.5rem, 2.4rem + 4.5vw, 6rem);   /* 56 → 96: delivery, contacts */
+  --section-dense: clamp(2.5rem, 1.8rem + 3vw, 4rem);   /* 40 → 64: catalog head, wholesale */
+  --space: clamp(1.25rem, 0.5rem + 3vw, 2.5rem);        /* page gutter 20 → 40 */
+  --container: 1280px;
+  --gap: 1.5rem;
+
+  /* shape and chrome */
+  --radius: 4px;
+  --radius-s: 2px;
+  --control-h: 3.5rem;   /* 56 */
+  --control-h-s: 3rem;   /* 48 */
+  --header-h: 56px;
+  --bar-h: 64px;
+  --rule: 1px;
+
+  /* motion: concept §8.7 */
+  --ease-out: cubic-bezier(.2, .7, .2, 1);
+  --dur: 600ms;
+  --dur-fast: 200ms;
+  --dur-panel: 240ms;
+  --dur-scale: 700ms;
+  --dur-delivery: 800ms;
+
+  /* layers */
+  --z-header: 50;
+  --z-bar: 40;
+}
+@media (min-width: 64rem) {
+  :root { --header-h: 72px; }
+}
+@media (max-width: 47.99rem) {
+  :root { --dur-scale: 500ms; --dur-delivery: 500ms; }
+}

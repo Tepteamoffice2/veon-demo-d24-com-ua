@@ -1,0 +1,15 @@
+---
+// The ending of every block: Viber as the one primary action and both phones as text links (ux/demo-home.md §8).
+import { phones, viber } from "../data/contacts";
+interface Props { tone?: "light" | "field" | "seal"; viberLabel?: string; showPhones?: boolean; class?: string; }
+const { tone = "light", viberLabel = "Написати у Viber", showPhones = true, class: cls } = Astro.props;
+const btn = tone === "light" ? "btn--primary" : tone === "field" ? "btn--outline-inverse" : "btn--inverse";
+---
+<div class:list={["actions", `actions--${tone}`, cls]}>
+  <a class:list={["btn", btn]} href={viber.href} target="_blank" rel="noopener">{viberLabel}</a>
+  {showPhones && (
+    <p class="actions__phones">
+      {phones.map((p) => <a class="tel" href={p.href}>{p.display}</a>)}
+    </p>
+  )}
+</div>

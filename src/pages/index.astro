@@ -1,0 +1,249 @@
+---
+// Delta Parts homepage (design/concept.md, veon-concept: hero, vin, catalog, delivery, trust, wholesale, contacts).
+import Base from "../layouts/Base.astro";
+import Section from "../components/Section.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import MobileBar from "../components/MobileBar.astro";
+import ChannelPicker from "../components/ChannelPicker.astro";
+import ContactActions from "../components/ContactActions.astro";
+import FutureLink from "../components/FutureLink.astro";
+import { phones, viber, email, address, mapHref, hours, socials, SOON } from "../data/contacts";
+import "@fontsource-variable/advent-pro/standard.css";
+import "@fontsource-variable/nata-sans/wght.css";
+import adventCyr from "@fontsource-variable/advent-pro/files/advent-pro-cyrillic-standard-normal.woff2?url";
+import "../styles/site.css";
+
+const title = "Запчастини для іномарок у Києві — Delta Parts, підбір за VIN";
+const description = "Підберемо запчастину за VIN-кодом. Магазин і склад на вул. Колекторна, 3-А, Київ. Самовивіз, кур'єр по Києву, Нова Пошта й Гюнсел. З 2007 року.";
+
+const brands = ["Alfa Romeo", "Audi", "BMW", "Chevrolet", "Citroen", "Daewoo", "Ford", "Honda", "Hyundai", "Infiniti", "KIA", "Land Rover", "Lexus", "Mazda", "Mercedes", "Mini", "Mitsubishi", "Nissan", "Opel", "Peugeot", "Porsche", "Renault", "Seat", "Skoda", "Smart", "Ssang Yong", "Subaru", "Suzuki", "Toyota", "Volkswagen"];
+
+const store = {
+  "@context": "https://schema.org",
+  "@type": "AutoPartsStore",
+  name: "Delta Parts",
+  address: { "@type": "PostalAddress", streetAddress: "вул. Колекторна, 3-А", addressLocality: "Київ", addressCountry: "UA" },
+  telephone: phones.map((p) => p.raw),
+  email: email.display,
+  openingHours: ["Mo-Fr 09:00-18:00", "Sa 10:00-14:00"],
+  sameAs: socials.map((s) => s.href),
+};
+---
+<Base lang="uk" title={title} description={description}>
+  <Fragment slot="head">
+    <link rel="preload" href={adventCyr} as="font" type="font/woff2" crossorigin />
+    <script type="application/ld+json" set:html={JSON.stringify(store)} />
+  </Fragment>
+  <Header slot="header" />
+
+  <Section id="hero" class="hero" rec="R-001,R-008,R-009,R-010,R-105,R-106,R-201,R-204,R-206,R-208,G-R002,G-R003">
+    <div class="container hero__grid">
+      <div class="hero__main">
+        <h1 class="hero__title">Запчастини для іномарок у Києві: від VIN-коду до деталі в руках</h1>
+        <p class="hero__lead">Надішліть VIN-код або марку, модель і рік авто, і менеджер підбере артикул та назве ціну.</p>
+        <div class="hero__actions">
+          <ChannelPicker id="channels-hero" label="Підібрати за VIN" rec="R-001" />
+          <a class="tel hero__tel" href={phones[0].href}>{phones[0].display}</a>
+          <FutureLink note={SOON}>Пошук за кодом деталі</FutureLink>
+        </div>
+      </div>
+    </div>
+    <div class="band" data-rec="R-002">
+      <div class="container">
+        <ol class="scale" role="list" aria-label="Шкала часу від запиту до отримання деталі">
+          <li class="scale__mark" style="--i:0">
+            <svg class="pointer" viewBox="0 0 20 24" width="20" height="24" aria-hidden="true"><path d="M0 12 20 0v24Z" /></svg>
+            <span class="scale__value">0</span>
+            <span class="scale__label">VIN у Viber або телефоном</span>
+          </li>
+          <li class="scale__mark" style="--i:1">
+            <span class="scale__value"><span class="scale__pre">до</span> 30 <span class="scale__unit">хв*</span></span>
+            <span class="scale__label">підбір артикулу й ціни</span>
+          </li>
+          <li class="scale__mark" style="--i:2">
+            <span class="scale__value">+10 <span class="scale__unit">хв*</span></span>
+            <span class="scale__label">видача на Колекторній, якщо деталь на складі</span>
+          </li>
+          <li class="scale__mark" style="--i:3">
+            <span class="scale__value">1–3 <span class="scale__unit">дні</span></span>
+            <span class="scale__label">Нова Пошта або Гюнсел</span>
+          </li>
+        </ol>
+        <p class="scale__note">* за даними компанії</p>
+      </div>
+    </div>
+    <div class="container hero__aside">
+      <ul class="passport" role="list" aria-label="Коротко про магазин">
+        <li>На ринку з 2007 року</li>
+        <li>150+ брендів, лише офіційні представники</li>
+        <li><span>вул. Колекторна, 3-А</span><span class="passport__hours">Пн–Пт 9–18, Сб 10–14</span></li>
+      </ul>
+    </div>
+  </Section>
+
+  <Section id="vin" class="sec sec--surface sec--roomy" rec="R-001" label="Підбір за VIN-кодом">
+    <div class="container">
+      <p class="equation">
+        <span class="eq__term">VIN-код<span class="eq__alt">або марка, модель, рік</span></span>
+        <span class="eq__op" aria-hidden="true">+</span><span class="visually-hidden">і</span>
+        <span class="eq__term">назва деталі</span>
+        <span class="eq__op eq__op--eq"><span aria-hidden="true">=</span><span class="visually-hidden">, а в результаті</span><span class="eq__note">до 30 хв, за даними компанії</span></span>
+        <span class="eq__term eq__term--result">артикул і ціна</span>
+      </p>
+      <div class="vin__grid">
+        <div class="vin__text">
+          <h2 class="h2">Немає артикулу? Надішліть VIN, і ми підберемо</h2>
+          <p class="body-l">Напишіть у Viber або зателефонуйте: VIN-код чи марку, модель і рік випуску, а також назву деталі. VIN-код вказаний у свідоцтві про реєстрацію авто.</p>
+          <FutureLink note={SOON} class="soon-inline">Онлайн-підбір за VIN</FutureLink>
+        </div>
+        <ContactActions class="vin__actions" viberLabel="Надіслати VIN у Viber" />
+      </div>
+    </div>
+  </Section>
+
+  <Section id="catalog" class="sec sec--dense" rec="R-003" label="Асортимент">
+    <div class="container">
+      <h2 class="h2 catalog__title">Деталі, оливи, автохімія: 150+ брендів для 30 марок</h2>
+      <div class="catalog__grid">
+        <article class="cat-main">
+          <h3 class="cat-main__title">Запчастини</h3>
+          <p class="body-l cat-main__list">Деталі для ТО, кузов, автоскло, дзеркала, щітки склоочисника, лампи, запобіжники, акумулятори за розмірами, гофри глушника.</p>
+          <h4 class="brands__title" id="brands-title">30 марок у каталозі</h4>
+          <ul class="brands" role="list" aria-labelledby="brands-title" data-brands>
+            {brands.map((b) => <li>{b}</li>)}
+          </ul>
+          <button type="button" class="brands__more" data-brands-toggle aria-expanded="false" hidden>Усі 30 марок</button>
+          <div class="cat-main__actions">
+            <a class="btn btn--primary" href={viber.href} target="_blank" rel="noopener">Запитати наявність у Viber</a>
+            <FutureLink note={SOON}>Онлайн-каталог</FutureLink>
+          </div>
+        </article>
+        <div class="cat-side">
+          <article class="cat-item">
+            <h3 class="cat-item__title">Оливи й рідини</h3>
+            <p>Моторні, трансмісійні, гальмівні, охолоджувальні й омивальні рідини, AdBlue, гідравлічні. Mobil, Castrol.</p>
+            <FutureLink note={SOON}>Каталог олив</FutureLink>
+          </article>
+          <article class="cat-item">
+            <h3 class="cat-item__title">Автохімія</h3>
+            <p>Герметики, очисники, мастила, швидкий старт, присадки, клеї.</p>
+            <FutureLink note={SOON}>Каталог автохімії</FutureLink>
+          </article>
+          <article class="cat-item">
+            <h3 class="cat-item__title">Інструмент</h3>
+            <p>Ключі й головки, динамометричні ключі, домкрати, компресори, пускові дроти.</p>
+            <FutureLink note={SOON}>Каталог інструменту</FutureLink>
+          </article>
+        </div>
+      </div>
+    </div>
+  </Section>
+
+  <Section id="delivery" class="sec sec--field sec--mid on-dark" rec="R-002" label="Доставка й оплата">
+    <div class="container">
+      <h2 class="h2">Забрати за 10 хв або отримати Новою Поштою*</h2>
+      <ol class="dscale" role="list" aria-label="Способи отримання на шкалі часу" data-scale>
+        <li class="dmark" style="--i:0">
+          <span class="dmark__value">+10 <span class="scale__unit">хв*</span></span>
+          <span class="dmark__title">Самовивіз</span>
+          <span class="dmark__text">{address.street}, {address.entry}. Для товару «на складі».</span>
+        </li>
+        <li class="dmark" style="--i:1">
+          <span class="dmark__value dmark__value--word">Київ</span>
+          <span class="dmark__title">Кур'єр по Києву</span>
+          <span class="dmark__text">Лівий і правий берег.</span>
+        </li>
+        <li class="dmark" style="--i:2">
+          <span class="dmark__value">1–3 <span class="scale__unit">дні</span></span>
+          <span class="dmark__title">По Україні</span>
+          <span class="dmark__text">Нова Пошта або Гюнсел.</span>
+        </li>
+      </ol>
+      <p class="scale__note scale__note--start">* за даними компанії</p>
+      <div class="pay">
+        <h3 class="pay__title">Оплата</h3>
+        <p class="pay__text">Готівкою або карткою в магазині й кур'єру, післяплата з передоплатою 30%, оплата на рахунок.</p>
+      </div>
+      <div class="delivery__end">
+        <ContactActions tone="field" viberLabel="Уточнити доставку у Viber" showPhones={false} />
+        <a class="tel" href={phones[0].href}>{phones[0].display}</a>
+        <FutureLink note={SOON}>Оплата і доставка, детально</FutureLink>
+      </div>
+    </div>
+  </Section>
+
+  <Section id="trust" class="sec sec--roomy" rec="R-002,R-005" label="Чому Delta Parts">
+    <div class="container trust__grid">
+      <div class="trust__lead">
+        <h2 class="statement">Не підійшла деталь? Повернення протягом 14 днів</h2>
+        <p class="body-l">Якісний товар можна повернути, крім товару з зарубіжних і спеціальних складів.</p>
+      </div>
+      <div class="trust__side">
+        <dl class="facts">
+          <div><dt>З 2007 року на ринку</dt><dd>Постачаємо деталі та технічні рідини, маємо власний склад.</dd></div>
+          <div><dt>Понад 150 брендів, лише офіційні представники</dt><dd>Від бюджетних до світових. Закупівля тільки в офіційних представників брендів, за прямими договорами з дистриб'юторами.</dd></div>
+          <div><dt>Гарантія виробника</dt><dd>На автозапчастини діє гарантія виробника.</dd></div>
+          <div><dt>Ціна в середньому на 10% нижча за ринкову</dt><dd>Понад 97% заявок виконуються вчасно. За даними компанії.</dd></div>
+        </dl>
+        <div class="trust__end">
+          <a class="link-action" href={viber.href} target="_blank" rel="noopener">Запитати про гарантію у Viber</a>
+          <FutureLink note={SOON}>Повернення і гарантія</FutureLink>
+          <FutureLink note={SOON}>Про компанію</FutureLink>
+        </div>
+      </div>
+    </div>
+  </Section>
+
+  <Section id="wholesale" class="sec sec--surface sec--dense" label="Оптовим покупцям">
+    <div class="container wholesale__inner">
+      <div>
+        <h2 class="h2">Для СТО й оптовиків: умови з менеджером</h2>
+        <p class="body-l">Зателефонуйте або напишіть, щоб обговорити співпрацю.</p>
+        <p class="wholesale__soon">
+          <FutureLink note={SOON}>Сторінка для оптовиків</FutureLink>
+          <FutureLink note={SOON}>Постачальникам</FutureLink>
+        </p>
+      </div>
+      <div class="wholesale__actions">
+        <a class="btn btn--primary" href={phones[0].href}>Обговорити умови</a>
+        <a class="link-action" href={viber.href} target="_blank" rel="noopener">Написати у Viber</a>
+      </div>
+    </div>
+  </Section>
+
+  <Section id="contacts" class="sec sec--seal sec--mid on-dark" rec="R-006,S-R007" label="Контакти">
+    <div class="container">
+      <h2 class="h2">Контакти</h2>
+      <div class="contacts__grid">
+        <div class="endline" aria-hidden="true">
+          <span class="endline__mark"><svg class="endline__pointer" aria-hidden="true" viewBox="0 0 20 24" width="20" height="24"><path d="M0 12 20 0v24Z" /></svg></span>
+        </div>
+        <div class="contacts__phones">
+          {phones.map((p) => <a class="contacts__big tel" href={p.href}>{p.display}</a>)}
+          <a class="contacts__mail" href={email.href}>{email.display}</a>
+        </div>
+        <address class="contacts__address">
+          <span class="contacts__big">{address.street}</span>
+          <span class="contacts__entry">{address.entry}, {address.city}</span>
+          <a class="contacts__route" href={mapHref} target="_blank" rel="noopener">Маршрут у Google Maps</a>
+        </address>
+      </div>
+      <div class="contacts__row">
+        <dl class="hours" aria-label="Графік роботи">
+          {hours.map((h) => <div><dt>{h.days}</dt><dd>{h.time}</dd></div>)}
+        </dl>
+        <a class="btn btn--inverse" href={viber.href} target="_blank" rel="noopener">Написати у Viber</a>
+        <ul class="socials" role="list" aria-label="Delta Parts у соцмережах">
+          {socials.map((s) => <li><a href={s.href} target="_blank" rel="noopener">{s.name}</a></li>)}
+        </ul>
+      </div>
+    </div>
+  </Section>
+
+  <Fragment slot="footer">
+    <Footer />
+    <MobileBar />
+  </Fragment>
+  <script src="../scripts/site.ts"></script>
+</Base>

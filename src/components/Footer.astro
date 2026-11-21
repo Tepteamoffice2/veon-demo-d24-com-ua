@@ -1,0 +1,20 @@
+---
+import Logo from "./Logo.astro";
+import FutureLink from "./FutureLink.astro";
+import { anchors, SOON } from "../data/contacts";
+const future = ["Оплата і доставка", "Повернення і гарантія", "Про компанію", "Оптовим покупцям", "Постачальникам", "Акції", "Вакансії", "Документація"];
+---
+<footer class="site-footer">
+  <div class="container site-footer__inner">
+    <div class="site-footer__brand">
+      <Logo width={136} />
+      <p class="site-footer__copy">© Delta Parts Group</p>
+    </div>
+    <nav class="site-footer__nav" aria-label="Розділи сторінки, підвал">
+      <ul role="list">{anchors.map((a) => <li><a href={a.href}>{a.label}</a></li>)}</ul>
+    </nav>
+    <ul class="site-footer__future" role="list" aria-label="Розділи в розробці">
+      {future.map((f) => <li><FutureLink note={SOON}>{f}</FutureLink></li>)}
+    </ul>
+  </div>
+</footer>

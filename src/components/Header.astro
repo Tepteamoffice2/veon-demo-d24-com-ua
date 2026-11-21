@@ -1,0 +1,47 @@
+---
+// Site header (concept §5 «Навигация»): logo → #top, five anchors, phone as text, Viber, future cart/account/RU.
+// Under 1240px: logo, call icon (tel:), and a menu built on <details> so it opens without scripts.
+import Logo from "./Logo.astro";
+import Icon from "./Icon.astro";
+import FutureLink from "./FutureLink.astro";
+import { anchors, phones, viber, SOON } from "../data/contacts";
+const main = phones[0];
+---
+<header class="site-header" data-rec="R-001,R-010,R-208">
+  <div class="container site-header__inner">
+    <Logo class="site-header__logo" width={150} />
+    <nav class="nav" aria-label="Розділи сторінки">
+      <ul class="nav__list" role="list">
+        {anchors.map((a) => <li><a class="nav__link" href={a.href}>{a.label}</a></li>)}
+      </ul>
+    </nav>
+    <div class="site-header__tools">
+      <a class="site-header__phone tel" href={main.href}>{main.display}</a>
+      <a class="btn btn--outline btn--small" href={viber.href} target="_blank" rel="noopener">Viber</a>
+      <FutureLink note={SOON} class="site-header__future">Кошик</FutureLink>
+      <FutureLink note={SOON} class="site-header__future">Кабінет</FutureLink>
+      <span class="lang"><span class="lang__current" aria-current="true" lang="uk">UA</span><FutureLink note={SOON} class="site-header__future">RU</FutureLink></span>
+    </div>
+    <a class="site-header__call" href={main.href}><Icon name="phone" /><span class="visually-hidden">Подзвонити {main.display}</span></a>
+    <details class="menu">
+      <summary class="menu__toggle"><Icon name="menu" /><span class="visually-hidden">Меню</span></summary>
+      <div class="menu__panel">
+        <nav aria-label="Розділи сторінки, меню">
+          <ul class="menu__list" role="list">
+            {anchors.map((a) => <li><a class="menu__link" href={a.href}>{a.label}</a></li>)}
+          </ul>
+        </nav>
+        <div class="menu__contacts">
+          {phones.map((p) => <a class="tel menu__tel" href={p.href}>{p.display}</a>)}
+          <a class="btn btn--primary" href={viber.href} target="_blank" rel="noopener">Написати у Viber</a>
+        </div>
+        <ul class="menu__future" role="list">
+          <li><FutureLink note={SOON}>Онлайн-каталог</FutureLink></li>
+          <li><FutureLink note={SOON}>Кошик</FutureLink></li>
+          <li><FutureLink note={SOON}>Кабінет</FutureLink></li>
+          <li><FutureLink note={SOON}>Російська версія</FutureLink></li>
+        </ul>
+      </div>
+    </details>
+  </div>
+</header>

@@ -1,0 +1,15 @@
+---
+// Client logo, cropped from the client's own site screenshot (audit/screens/home-mobile-fold.png, 2x).
+// Temporary: the vector original (SVG) is requested from the client (concept.md §1, §8.9).
+import { Image } from "astro:assets";
+import logo from "../assets/delta-parts-logo.png";
+interface Props { width?: number; class?: string; }
+const { width = 160, class: cls } = Astro.props;
+---
+<a href="#top" class:list={["logo", cls]} title="На початок сторінки">
+  <Image src={logo} alt="Delta Parts — онлайн автомаркет" width={width} densities={[1, 2, 3]} format="webp" loading="eager" decoding="async" />
+</a>
+<style>
+  .logo { display: inline-flex; align-items: center; min-height: var(--control-h-s); border-radius: var(--radius-s); }
+  .logo :global(img) { width: 100%; height: auto; }
+</style>
